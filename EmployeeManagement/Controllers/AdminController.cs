@@ -26,9 +26,9 @@ namespace EmployeeManagement.Controllers
                 else
                     return this.BadRequest(new { success = false, message = "Login Failed", data = result });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                return this.BadRequest(new { success = false, message = "Login Failed" });
             }
         }
 
