@@ -56,5 +56,36 @@ namespace RepositoryLayer.Service
             }
 
         }
+
+        public bool DeleteEmployee(int EmployeeId)
+        {
+            Connection = new SqlConnection(this.configuration["ConnectionStrings:EmployeeManagement"]);
+            try
+            {
+
+                using (Connection)
+                {
+                    SqlCommand cmd = new SqlCommand("DeleteEmployee", Connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EmployeeId", EmployeeId);
+                    Connection.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    Connection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -33,5 +33,25 @@ namespace EmployeeManagement.Controllers
             }
         }
 
+        [HttpDelete("DeleteEmployee/{EmployeeId}")]
+        public IActionResult DeleteEmployee(int EmployeeId)
+        {
+            try
+            {
+                if (this.employeeBL.DeleteEmployee(EmployeeId))
+                {
+                    return this.Ok(new { Success = true, message = "Employee Deleted Sucessfully" });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Sorry! please Enter Valid Employee Id" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+
     }
 }

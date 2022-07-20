@@ -35,3 +35,15 @@ values (@FirstName, @LastName,@Email,@Password, @EmpAddress, @Gender ,@DateOfBir
 @Salary, @PhoneNumber);
 End;
 
+-------Procedure for delete----
+create procedure DeleteEmployee
+(
+@EmployeeId int
+)
+as
+BEGIN
+Delete Employee
+where EmployeeId = @EmployeeId;
+End;
+
+
