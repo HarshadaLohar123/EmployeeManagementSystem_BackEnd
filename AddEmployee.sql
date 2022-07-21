@@ -77,3 +77,11 @@ PhoneNumber=@PhoneNumber
 where EmployeeId = @EmployeeId;
 End;
 
+----Procedure for getAllEmployee----
+
+create procedure GetAllEmployee
+as
+BEGIN
+	select * from Employee;
+End;
+

@@ -128,6 +128,61 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
+
+        public List<EmployeeModel> GetAllEmployee()
+        {
+            try
+            {
+                List<EmployeeModel> employeeModels = new List<EmployeeModel>();
+                this.Connection = new SqlConnection(this.configuration["ConnectionStrings:EmployeeManagement"]);
+                SqlCommand cmd = new SqlCommand("GetAllEmployee", this.Connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                this.Connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        employeeModels.Add(new EmployeeModel
+                        {
+                            EmployeeId = Convert.ToInt32(reader["EmployeeId"]),
+                            FirstName = reader["FirstName"].ToString(),
+                            LastName = reader["LastName"].ToString(),
+                            Email = reader["Email"].ToString(),
+                            Password =reader["Password"].ToString(),
+                            EmpAddress = reader["EmpAddress"].ToString(),
+                            Gender = reader["Gender"].ToString(),
+                            DateOfBirth = reader["DateOfBirth"].ToString(),
+                            Position = reader["Position"].ToString(),
+
+
+                            Salary = Convert.ToDecimal(reader["Salary"]),
+                            PhoneNumber =reader["PhoneNumber"].ToString(),
+                            
+                        });
+                    }
+
+                    this.Connection.Close();
+                    return employeeModels;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                this.Connection.Close();
+            }
+        }
     }
 }
+
 

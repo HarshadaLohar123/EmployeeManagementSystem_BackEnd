@@ -71,5 +71,26 @@ namespace EmployeeManagement.Controllers
             }
         }
 
+        [HttpGet("GetAllEmployee")]
+        public IActionResult GetAllEmployee()
+        {
+            try
+            {
+                var updatedEmployeeDetail = this.employeeBL.GetAllEmployee();
+                if (updatedEmployeeDetail != null)
+                {
+                    return this.Ok(new { Success = true, message = "Employee Detail Fetched Sucessfully", Response = updatedEmployeeDetail });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Sorry! Wrong credentials" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+
     }
 }

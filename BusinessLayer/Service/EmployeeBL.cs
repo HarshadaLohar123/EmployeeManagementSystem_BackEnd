@@ -42,6 +42,18 @@ namespace BusinessLayer.Service
             }
         }
 
+        public List<EmployeeModel> GetAllEmployee()
+        {
+            try
+            {
+                return this.EmployeeRL.GetAllEmployee();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public UpdateEmployeeModel UpdateEmployee(UpdateEmployeeModel updateEmployee)
         {
             try
