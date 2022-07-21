@@ -1,10 +1,13 @@
 ﻿using DatabaseLayer.Model;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace RepositoryLayer.Service
@@ -31,6 +34,7 @@ namespace RepositoryLayer.Service
                 command.Parameters.AddWithValue("@Email", adminResponse.Email);
                 command.Parameters.AddWithValue("@Password", adminResponse.Password);
                 this.Connection.Open();
+             
                 SqlDataReader reader = command.ExecuteReader();
                 AdminLoginModel admin = new AdminLoginModel();
                 if (reader.HasRows)
@@ -44,6 +48,8 @@ namespace RepositoryLayer.Service
                     }
 
                     this.Connection.Close();
+                    admin.Token = this.GetJWTToken(admin);
+
                     return admin;
                 }
                 else
@@ -57,6 +63,30 @@ namespace RepositoryLayer.Service
 
                 throw;
             }
+        }
+
+        public string GetJWTToken(AdminLoginModel admin)
+        {
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenKey = Encoding.ASCII.GetBytes("THIS_IS_MY_KEY_TO_GENERATE_TOKEN");
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                     new Claim(ClaimTypes.Role, "Admin"),
+                    new Claim("Email", admin.Email),
+                    new Claim("AdminId",admin.AdminId.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddHours(24),
+
+                SigningCredentials =
+                new SigningCredentials(
+                    new SymmetricSecurityKey(tokenKey),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }
