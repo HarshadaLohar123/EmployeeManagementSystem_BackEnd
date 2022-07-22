@@ -94,6 +94,5 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BusinessLayer.Service
 {
-    public class EmployeeBL:IEmployeeBL
+    public class EmployeeBL : IEmployeeBL
     {
         private readonly IEmployeeRL EmployeeRL;
 
@@ -54,6 +54,8 @@ namespace BusinessLayer.Service
             }
         }
 
+
+
         public UpdateEmployeeModel UpdateEmployee(UpdateEmployeeModel updateEmployee)
         {
             try
@@ -65,5 +67,6 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
+
     }
 }

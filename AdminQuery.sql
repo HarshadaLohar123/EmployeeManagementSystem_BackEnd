@@ -14,7 +14,7 @@ select * from Admin
 
 INSERT INTO Admin VALUES ('Admin Admin','Admin@admin.com', 'Admin@123', '+91 8805713251');
 
-
+--------Admin Login
 Create Procedure LoginAdmin
 (
 	@Email varchar(max),

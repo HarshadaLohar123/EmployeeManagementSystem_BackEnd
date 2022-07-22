@@ -13,5 +13,8 @@ namespace BusinessLayer.Interface
 
         public List<EmployeeModel> GetAllEmployee();
 
+
+       
+
     }
 }

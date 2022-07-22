@@ -1,15 +1,18 @@
 ﻿using DatabaseLayer.Model;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace RepositoryLayer.Service
 {
-    public class EmployeeRL:IEmployeeRL
+    public class EmployeeRL : IEmployeeRL
     {
         private SqlConnection Connection;
         private readonly IConfiguration configuration;
@@ -152,7 +155,7 @@ namespace RepositoryLayer.Service
                             FirstName = reader["FirstName"].ToString(),
                             LastName = reader["LastName"].ToString(),
                             Email = reader["Email"].ToString(),
-                            Password =reader["Password"].ToString(),
+                            Password = reader["Password"].ToString(),
                             EmpAddress = reader["EmpAddress"].ToString(),
                             Gender = reader["Gender"].ToString(),
                             DateOfBirth = reader["DateOfBirth"].ToString(),
@@ -160,8 +163,8 @@ namespace RepositoryLayer.Service
 
 
                             Salary = Convert.ToDecimal(reader["Salary"]),
-                            PhoneNumber =reader["PhoneNumber"].ToString(),
-                            
+                            PhoneNumber = reader["PhoneNumber"].ToString(),
+
                         });
                     }
 
@@ -182,6 +185,8 @@ namespace RepositoryLayer.Service
                 this.Connection.Close();
             }
         }
+
+       
     }
 }
 

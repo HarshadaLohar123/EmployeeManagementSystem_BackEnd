@@ -85,3 +85,22 @@ BEGIN
 	select * from Employee;
 End;
 
+
+-----Procedure for EmployeeLogin----
+
+Create Proc EmployeeLogin
+(
+	@Email varchar(max),
+	@Password varchar(max)
+)
+as
+BEGIN
+	If(Exists(select * from Employee where Email= @Email and Password = @Password))
+		Begin
+			select * from Employee where Email= @Email and Password = @Password;
+		end
+	Else
+		Begin
+			select 2;
+		End
+END;
