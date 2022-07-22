@@ -1,0 +1,37 @@
+﻿using BusinessLayer.Interface;
+using DatabaseLayer.Model;
+using Microsoft.AspNetCore.Mvc;
+using System;
+
+namespace EmployeeManagement.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class EmployeeController : Controller
+    {
+        private readonly IEmployeeBL employeeBL;
+        public EmployeeController(IEmployeeBL employeeBL)
+        {
+            this.employeeBL = employeeBL;
+        }
+
+        [HttpPost("AddEmployee")]
+        public IActionResult AddEmployee(EmployeeModel employee)
+        {
+            try
+            {
+                EmployeeModel userData = this.employeeBL.AddEmployee(employee);
+                if (userData != null)
+                {
+                    return this.Ok(new { Success = true, message = "Employee Registered Sucessfully", Response = userData });
+                }
+                return this.Ok(new { Success = true, message = "Sorry! Employee Already Exists" });
+            }
+            catch (Exception ex)
+            {
+                return this.BadRequest(new { Success = false, message = ex.Message });
+            }
+        }
+
+    }
+}
