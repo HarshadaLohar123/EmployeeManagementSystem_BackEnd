@@ -8,5 +8,7 @@ namespace RepositoryLayer.Interface
     public interface IEmployeeRL
     {
         public EmployeeModel AddEmployee(EmployeeModel employee);
+        public bool DeleteEmployee(int EmployeeId);
+
     }
 }
