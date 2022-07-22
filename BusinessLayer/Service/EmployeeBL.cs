@@ -27,7 +27,6 @@ namespace BusinessLayer.Service
 
                 throw ex;
             }
-
         }
 
         public bool DeleteEmployee(int EmployeeId)
@@ -41,7 +40,6 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
-
         public List<EmployeeModel> GetAllEmployee()
         {
             try
@@ -53,9 +51,6 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
-
-
-
         public UpdateEmployeeModel UpdateEmployee(UpdateEmployeeModel updateEmployee)
         {
             try

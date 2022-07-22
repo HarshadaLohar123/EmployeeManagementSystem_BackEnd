@@ -9,10 +9,9 @@ namespace RepositoryLayer.Interface
     {
         public EmployeeModel AddEmployee(EmployeeModel employee);
         public bool DeleteEmployee(int EmployeeId);
+
         public UpdateEmployeeModel UpdateEmployee(UpdateEmployeeModel updateEmployee);
         public List<EmployeeModel> GetAllEmployee();
-
-        
 
     }
 }

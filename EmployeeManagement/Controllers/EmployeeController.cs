@@ -16,7 +16,7 @@ namespace EmployeeManagement.Controllers
             this.employeeBL = employeeBL;
         }
 
-        [Authorize(Roles = Role.Admin)]
+       
         [HttpPost("AddEmployee")]
         public IActionResult AddEmployee(EmployeeModel employee)
         {
@@ -35,7 +35,7 @@ namespace EmployeeManagement.Controllers
             }
         }
 
-        [Authorize(Roles = Role.Admin)]
+       
         [HttpDelete("DeleteEmployee/{EmployeeId}")]
         public IActionResult DeleteEmployee(int EmployeeId)
         {
@@ -55,7 +55,7 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-        [Authorize(Roles = Role.Admin)]
+       
         [HttpPost("UpdateEmployee")]
         public IActionResult UpdateEmployee(UpdateEmployeeModel updateEmployee)
         {
@@ -73,7 +73,7 @@ namespace EmployeeManagement.Controllers
                 return this.BadRequest(new { Success = false, message = ex.Message });
             }
         }
-        [Authorize(Roles = Role.Admin)]
+        
         [HttpGet("GetAllEmployee")]
         public IActionResult GetAllEmployee()
         {

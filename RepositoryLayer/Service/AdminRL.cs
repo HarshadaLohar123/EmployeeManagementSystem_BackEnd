@@ -48,8 +48,7 @@ namespace RepositoryLayer.Service
                     }
 
                     this.Connection.Close();
-                    admin.Token = this.GetJWTToken(admin);
-
+                   
                     return admin;
                 }
                 else
@@ -63,30 +62,6 @@ namespace RepositoryLayer.Service
 
                 throw;
             }
-        }
-
-        public string GetJWTToken(AdminLoginModel admin)
-        {
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenKey = Encoding.ASCII.GetBytes("THIS_IS_MY_KEY_TO_GENERATE_TOKEN");
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                     new Claim(ClaimTypes.Role, "Admin"),
-                    new Claim("Email", admin.Email),
-                    new Claim("AdminId",admin.AdminId.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddHours(24),
-
-                SigningCredentials =
-                new SigningCredentials(
-                    new SymmetricSecurityKey(tokenKey),
-                    SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
         }
     }
 }

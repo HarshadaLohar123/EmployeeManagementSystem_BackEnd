@@ -160,8 +160,6 @@ namespace RepositoryLayer.Service
                             Gender = reader["Gender"].ToString(),
                             DateOfBirth = reader["DateOfBirth"].ToString(),
                             Position = reader["Position"].ToString(),
-
-
                             Salary = Convert.ToDecimal(reader["Salary"]),
                             PhoneNumber = reader["PhoneNumber"].ToString(),
 
@@ -186,7 +184,6 @@ namespace RepositoryLayer.Service
             }
         }
 
-       
     }
 }
 
